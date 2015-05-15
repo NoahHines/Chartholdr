@@ -1,17 +1,19 @@
 class ApplicationController < ActionController::Base
-
 	def hello
 		render text: "Welcome to Chartholdr. Here's an example url: http://localhost:3000/bar/800/700"
 	end
 
 	def bar
 
+		#generator=generator.new(300, 900)
+		@gen = Generator.new(300, 900)
+
 		@width = params[:width]
 		@height = params[:height]
 
-		@kit = IMGKit.new('http://nvd3.org/examples/linePlusBar.html', quality: 80, height: @height, width: @width)
+		@kit = IMGKit.new(@gen.getHTML, quality: 95, height: @height, width: @width, transparent: true)
 
-		send_data(@kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
+		send_data(@kit.to_png, :type => "image/png", :disposition => 'inline')
 		
 	end
 

@@ -1,5 +1,4 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -22,5 +21,8 @@ module Chartholdr
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Autoload classes in lib folder (for instance: Generator class)
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
