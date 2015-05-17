@@ -1,0 +1,10 @@
+/*
+	Custom CSS for Chartholdr
+*/
+
+.links {
+	border: 1px dotted #aaa;
+	padding: 0.5em;
+	text-align: center;
+	display: block;
+}

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root 'application#hello'
+  root 'application#home'
+
+  get '/home', to: 'application#home'
 
   #get '/bar/:id', to: 'application#bar', id: 3
 
