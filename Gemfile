@@ -8,9 +8,6 @@ gem 'rails', '4.2.1'
 gem 'imgkit'
 gem 'wkhtmltoimage-binary'
 
-# Foundation
-gem 'foundation-rails'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
