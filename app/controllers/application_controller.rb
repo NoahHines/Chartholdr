@@ -29,9 +29,18 @@ class ApplicationController < ActionController::Base
         #render :text => @output
         render html: @output.html_safe
 
-		#@kit = IMGKit.new(template.result(get_binding), quality: 95, height: @height, width: @width, transparent: true)
+		#@kit = IMGKit.new(@output.html_safe, quality: 95, height: @height, width: @width, transparent: true, 'javascript-delay' => 9000)
 
 		#send_data(@kit.to_png, :type => "image/png", :disposition => 'inline')
+
+
+		#kit = IMGKit.new(@output.html_safe, height: 900, transparent:true, quality:10)
+		#kit.stylesheets << "/stylesheets/nv.d3.css"
+		#file = kit.to_file(Rails.root + "public/pngs/" + "screenshot.png")
+		#send_file("#{Rails.root}/public/pngs/screenshot.png", :filename => "screenshot.png", :type => "image/png",:disposition => 'attachment',:streaming=> 'true')
+
+
+
 		
 	end
 
