@@ -1,11 +1,11 @@
 # Chartholdr
-An image placeholder service for charts and graphs.
+An image placeholder for charts and graphs.
 
 ### Give it a go
 ```html
 http://Chartholdr.io/pie/500
 ```
-Chartholdr hosts generic charts and graphs so that when you show your demo to a potential client, there are appropriate images rather than blank space or silly photos.
+Chartholdr hosts generic charts and graphs so you can spend time designing.
 
 ### Bar
 ![alt text](http://placehold.it/600x400 "Bar")
@@ -24,11 +24,26 @@ http://Chartholdr.io/pie/500/500
 ```
 
 ### Customization
-To choose the base color for your chart, simply add the color parameter to the url:
+####SVG Support
+To get svg files instead of PNGs, add /s/ in the url:
+```html
+http://Chartholdr.io/bar/s/800/400
+```
+
+To choose the base color for your chart, add the color parameter to the url:
+```html
+http://Chartholdr.io/bar/800/400/D3D3D3
+```
+
+You can also use [CSS color names](http://www.w3schools.com/cssref/css_colornames.asp)
 ```html
 http://Chartholdr.io/bar/800/400/lightgray
 ```
-or
-```html
-http://Chartholdr.io/bar/800/400/#D3D3D3
-```
+
+### Contributing
+We :heart: **Pull Requests**!
+
+### Roadmap
+WIP
+
+
