@@ -1,3 +1,5 @@
+require 'phantomjs'
+
 class ApplicationController < ActionController::Base
 
 	def get_binding # this is only a helper method to access the objects binding method
@@ -13,33 +15,36 @@ class ApplicationController < ActionController::Base
 
 	end
 
-	def bar
+	def pie
+		#TODO move this logic to generator class
 
-		#@gen = Generator.new(300, 900, 0)
-
+		# -8 and -18 due to default body margins
 		@width = params[:width]
 		@height = params[:height]
+		@width_a = (params[:width].to_i-8).to_s
+		@height_a = (params[:height].to_i-16).to_s
 
-		html = File.open("app/views/application/pie_template.html.erb").read
+		html = File.open("app/views/layouts/pie_layout.html.erb").read
 	    template = ERB.new(html)
-	    template.result
+		template = template.result(get_binding).html_safe
 
-        @output = template.result(get_binding)
+		# @tempFile is the generated HTML file that calls Pizza.init()
+		@templateFile = Tempfile.new(['templatefile', '.html'], "#{Rails.root}/tmp")
+		@templateFile.write(template)
+		File.chmod(444, @templateFile.path)
+		@templateFile.rewind
 
-        #render :text => @output
-        render html: @output.html_safe
+		# data object is used to pass in parameters into the js file
+		data = {"width" => @width, "height" => @height, "template" => @templateFile.path}.to_json
+		dataFile = Tempfile.new(['data', '.txt'], "#{Rails.root}/tmp")
+		dataFile.write(data)
+		File.chmod(444, dataFile.path)
+		dataFile.rewind
 
-		#@kit = IMGKit.new(@output.html_safe, quality: 95, height: @height, width: @width, transparent: true, 'javascript-delay' => 9000)
+		Phantomjs.run("./phantom/render.js", dataFile.path)
 
-		#send_data(@kit.to_png, :type => "image/png", :disposition => 'inline')
-
-
-		#kit = IMGKit.new(@output.html_safe, height: 900, transparent:true, quality:10)
-		#kit.stylesheets << "/stylesheets/nv.d3.css"
-		#file = kit.to_file(Rails.root + "public/pngs/" + "screenshot.png")
-		#send_file("#{Rails.root}/public/pngs/screenshot.png", :filename => "screenshot.png", :type => "image/png",:disposition => 'attachment',:streaming=> 'true')
-
-
+		# Send file inline
+		send_data(File.open("google_home.png").read, :type => "image/png", :disposition => 'inline')
 
 		
 	end

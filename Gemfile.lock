@@ -79,6 +79,7 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.17.1)
+    phantomjs (1.9.8.0)
     rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -159,6 +160,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   pg (= 0.17.1)
+  phantomjs
   rails (= 4.2.1)
   rails_12factor (= 0.0.2)
   sass-rails (~> 5.0)

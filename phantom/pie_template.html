@@ -1,0 +1,37 @@
+<html>
+<head>
+<link href="stylesheets/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+<style>
+body {
+	margin: 0;
+}
+svg {
+  width: 492px;
+
+  height: 484px; }
+
+</style>
+
+  </head>
+  <body>
+
+<div id="svg"></div>
+
+<ul data-pie-id="svg" data-options='{"percent_offset": "0"}'>
+  <li data-value="60"></li>
+  <li data-value="20"></li>
+  <li data-value="12"></li>
+  <li data-value="32"></li>
+  <li data-value="50"></li>
+</ul>
+
+<script src="javascripts/jquery.min.js"></script>
+<script src="javascripts/snap.svg-min.js"></script>
+<script src="javascripts/pizza.min.js"></script>
+
+<script>
+Pizza.init();
+</script>
+</body>
+
+</html>

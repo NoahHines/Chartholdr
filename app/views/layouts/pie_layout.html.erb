@@ -1,0 +1,37 @@
+<html>
+<head>
+<link href="/Users/altitudes/web/Chartholdr/public/stylesheets/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+<style>
+body {
+	margin: 0;
+}
+svg {
+  width: <%= @width_a %>px;
+
+  height: <%= @height_a %>px; }
+
+</style>
+
+  </head>
+  <body>
+
+<div id="svg"></div>
+
+<ul data-pie-id="svg" data-options='{"percent_offset": "0"}'>
+  <li data-value="60"></li>
+  <li data-value="20"></li>
+  <li data-value="12"></li>
+  <li data-value="32"></li>
+  <li data-value="50"></li>
+</ul>
+
+<script src="/Users/altitudes/web/Chartholdr/public/javascripts/jquery.min.js"></script>
+<script src="/Users/altitudes/web/Chartholdr/public/javascripts/snap.svg-min.js"></script>
+<script src="/Users/altitudes/web/Chartholdr/public/javascripts/pizza.min.js"></script>
+
+<script>
+Pizza.init();
+</script>
+</body>
+
+</html>
