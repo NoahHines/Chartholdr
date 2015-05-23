@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
 
 	def pie
 		#TODO move this logic to generator class
+		#TODO add support for SVGs
 
 		# -8 and -18 due to default body margins
 		@width = params[:width]
