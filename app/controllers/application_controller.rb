@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 		File.chmod(444, dataFile.path)
 		dataFile.rewind
 
-		Phantomjs.run("./phantom/render.js", dataFile.path)
+		Phantomjs.run("./"+"#{Rails.root}"+"/phantom/render.js", dataFile.path)
 
 		# Send file inline
 		send_data(File.open("google_home.png").read, :type => "image/png", :disposition => 'inline')
