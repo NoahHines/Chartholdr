@@ -10,6 +10,6 @@ var jsonData = JSON.parse(data);
 var page = require('webpage').create();
 page.viewportSize = { width: jsonData["width"], height: jsonData["height"] };
 page.open(jsonData["template"], function start(status) {
-  page.render('google_home.png', {format: 'png', quality: '100'});
+  page.render('google_home.png', {format: 'png', quality: '2'});
   phantom.exit();
 });
