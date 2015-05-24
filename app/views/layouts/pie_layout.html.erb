@@ -1,6 +1,6 @@
 <html>
 <head>
-<link href="/Users/altitudes/web/Chartholdr/public/stylesheets/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+<link href="<%= Rails.root %>/public/stylesheets/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
 <style>
 body {
 	margin: 0;
@@ -23,9 +23,9 @@ svg {
   <li data-value="42"></li>
 </ul>
 
-<script src="/Users/altitudes/web/Chartholdr/public/javascripts/jquery.min.js"></script>
-<script src="/Users/altitudes/web/Chartholdr/public/javascripts/snap.svg-min.js"></script>
-<script src="/Users/altitudes/web/Chartholdr/public/javascripts/pizza.min.js"></script>
+<script src="<%= Rails.root %>/public/javascripts/jquery.min.js"></script>
+<script src="<%= Rails.root %>/public/javascripts/snap.svg-min.js"></script>
+<script src="<%= Rails.root %>/public/javascripts/pizza.min.js"></script>
 
 <script>
 Pizza.init();
