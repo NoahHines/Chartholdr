@@ -7,9 +7,11 @@ var opened = fs.open(path, "r");
 var data = fs.read(path);
 var jsonData = JSON.parse(data);
 
+fs.write("var.txt", path, 'w');
+
 var page = require('webpage').create();
 page.viewportSize = { width: jsonData["width"], height: jsonData["height"] };
 page.open(jsonData["template"], function start(status) {
-  page.render('google_home.png', {format: 'png', quality: '2'});
+  page.render('render.png', {format: 'png', quality: '2'});
   phantom.exit();
 });

@@ -44,8 +44,10 @@ class ApplicationController < ActionController::Base
 
 		Phantomjs.run("#{Rails.root}"+"/phantom/render.js", dataFile.path)
 
+		render :text => File.open("#{Rails.root}"+"/var.txt").read
+
 		# Send file inline
-		send_data(File.open("#{Rails.root}"+"/google_home.png").read, :type => "image/png", :disposition => 'inline')
+		#send_data(File.open("#{Rails.root}"+"/render.png").read, :type => "image/png", :disposition => 'inline')
 
 		
 	end
