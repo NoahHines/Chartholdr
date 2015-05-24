@@ -1,6 +1,12 @@
 require 'phantomjs'
 
 class ApplicationController < ActionController::Base
+	# set constants
+	before_filter :set_constants
+	def set_constants
+	 	@max_width = 5000 #default constraint is 5000x5000 image
+		@max_height = 5000
+	end
 
 	def get_binding # this is only a helper method to access the objects binding method
 	    binding
@@ -16,16 +22,24 @@ class ApplicationController < ActionController::Base
 	end
 
 	def pie
+		
 		#TODO move this logic to generator class
 		#TODO add support for SVGs
 
-		# -8 and -18 due to default body margins
+		# If height is not specified, assume square
 		@width = params[:width]
-		@height = params[:height]
-		@width_a = (params[:width].to_i-8).to_s
-		@height_a = (params[:height].to_i-16).to_s
+		if !defined?(@height)
+			@height = params[:width]
+		else
+			@height = params[:height]
+		end
 
-		if (@width.to_i > 5000 || @height.to_i > 5000)
+		# -8 and -18 due to default css margins
+		@width_a = (@width.to_i-8).to_s
+		@height_a = (@height.to_i-16).to_s
+
+		# Constraints added so the server doesn't get murdered
+		if (@width.to_i > @max_width || @height.to_i > @max_height)
 			return
 		end
 
