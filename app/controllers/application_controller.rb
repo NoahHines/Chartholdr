@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 		@width_a = (params[:width].to_i-8).to_s
 		@height_a = (params[:height].to_i-16).to_s
 
-		html = File.open("app/views/layouts/pie_layout.html.erb").read
+		html = File.open(Rails.root+"app/views/layouts/pie_layout.html.erb").read
 	    template = ERB.new(html)
 		template = template.result(get_binding).html_safe
 
