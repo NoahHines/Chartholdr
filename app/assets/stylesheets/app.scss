@@ -12,9 +12,32 @@ $squidward: #f4f4f4;
 $dolphin-fart: #98dee5;
 $randy-newman: #ffffff;
 
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300);
+
+h1 {
+  font-family: 'Lato', sans-serif, 'Arial';
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  font-weight: 300;
+}
+
+h2, h3, h4 {
+  font-family: 'Lato', sans-serif, 'Arial';
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  font-weight: 100;
+  a {
+    font-weight: 300;
+    color: black;
+    text-shadow: none;
+  }
+  small {
+    text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.4);
+  }
+}
+
 h5 {
 	color: black !important;
 }
+
 
 @mixin linear-gradient($direction, $color-stops...) {
   // Direction has been omitted and happens to be a color-stop
@@ -69,16 +92,31 @@ h5 {
   @return $is-keyword or $is-angle;
 }
 
+
 .links {
-	border: 1px dotted #aaa;
+  color: $cold-grape;
+	border: 2px solid $submarine;
 	padding: 0.5em;
 	text-align: center;
 	display: block;
 	background-color: white;
+
+  ::-moz-selection { /* Code for Firefox */
+    color: $randy-newman;
+    background: $submarine;
+}
+
+::selection {
+    color: $randy-newman; 
+    background: $submarine;
+}
+
+
 }
 
 section {
-	padding: 3em 0;
+	padding: 6em 0;
+  padding-top: 10em;
 }
 
 header .row .title {

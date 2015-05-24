@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'application#home'
+  root 'application#index'
 
   get '/home', to: 'application#home'
 
