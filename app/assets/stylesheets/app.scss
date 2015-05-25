@@ -104,12 +104,11 @@ h5 {
   }
 }
 
-
 header .row .title {
   padding-top: 4em;
 }
 header {
-  padding: 0 0 5em 0;
+  padding: 0 0 4em 0;
   text-align: center;
   // background-color: $dolphin-fart;
   @include linear-gradient($dolphin-fart, $captains-chair);
@@ -156,12 +155,10 @@ section {
   width: 1em;
   margin-right: .2em;
   text-align: center;
-  /* opacity: .8; */
   font-variant: normal;
   text-transform: none;
   line-height: 1em;
   margin-left: .2em;
-  /* font-size: 120%; */
   -webkit-font-smoothing: antialiased;
 }
 .footer-icon:hover {
@@ -171,12 +168,32 @@ section {
   vertical-align: super;
 }
 
+.button {
+  font-weight: 300;
+}
+.button-icon {
+  font-size: 2em;
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline;
+  text-decoration: inherit;
+  width: 0.5em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  -webkit-font-smoothing: antialiased;
+}
+
 // Small screens
 @media only screen { } /* Define mobile styles */
 
 @media only screen and (max-width: 40em) {
   header {
-    padding: 0 0 2em 0;
+    padding: 0 0 0 0;
   }
   header .row .title {
     padding-top: 1em;

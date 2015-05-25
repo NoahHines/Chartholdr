@@ -1,6 +1,11 @@
 require 'phantomjs'
+#require 'carrierwave/orm/activerecord'
 
 class ApplicationController < ActionController::Base
+
+	# chart uploader using carrierwave
+	  #mount_uploader :chart, ChartUploader
+
 	# set constants
 	before_filter :set_constants
 	def set_constants
@@ -64,7 +69,6 @@ class ApplicationController < ActionController::Base
 			File.chmod(444, @templateFile.path)
 			@templateFile.rewind
 
-
 			# Create temp image to send
 			@tempImageFile = Tempfile.new(['image', '.png'], "#{Rails.root}/tmp")
 
@@ -74,7 +78,6 @@ class ApplicationController < ActionController::Base
 			dataFile.write(data)
 			File.chmod(444, dataFile.path)
 			dataFile.rewind
-
 
 			Phantomjs.run("#{Rails.root}"+"/phantom/render.js", dataFile.path)
 

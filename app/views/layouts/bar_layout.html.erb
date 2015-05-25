@@ -17,17 +17,35 @@
 
 </head>
 <body>
-
 	<div id="bar" style="height: <%= @height %>px;"></div>
 
 	<ul data-bar-id="bar" style="display: none;">
 		<li data-value="145"></li>
 		<li data-value="178"></li>
-		<li data-value="80"></li>
+		<li data-value="131"></li>
 		<li data-value="92"></li>
 		<li data-value="250"></li>
-		<li data-value="99"></li>
+		<li data-value="159"></li>
 		<li data-value="78"></li>
+		<% if (@width.to_i / @height.to_i) >= 2  %>
+			<li data-value="125"></li>
+			<li data-value="138"></li>
+			<li data-value="190"></li>
+			<li data-value="122"></li>
+			<li data-value="200"></li>
+		<% end %>
+		<% if (@width.to_i / @height.to_i) >= 4  %>
+			<li data-value="125"></li>
+			<li data-value="138"></li>
+			<li data-value="190"></li>
+			<li data-value="122"></li>
+			<li data-value="200"></li>
+			<li data-value="125"></li>
+			<li data-value="138"></li>
+			<li data-value="190"></li>
+			<li data-value="122"></li>
+			<li data-value="200"></li>
+		<% end %>
 	</ul>
 
 
