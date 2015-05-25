@@ -1,3 +1,4 @@
+@import 'palette';
 // Foundation by ZURB
 // foundation.zurb.com
 // Licensed under MIT Open Source
@@ -85,12 +86,12 @@ $include-html-global-classes: $include-html-classes;
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // We use these to define default font stacks
-// $font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+ $font-family-lato: 'Lato', sans-serif, 'Arial';
 // $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
 // We use these to define default font weights
-// $font-weight-normal: normal;
+ $font-weight-normal: 100;
 // $font-weight-bold: bold;
 
 // $white       : #FFFFFF;
@@ -123,9 +124,9 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to control various global styles
 // $body-bg: $white;
-// $body-font-color: $jet;
-// $body-font-family: $font-family-sans-serif;
-// $body-font-weight: $font-weight-normal;
+ $body-font-color: $randy-newman;
+ $body-font-family: $font-family-lato;
+ $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
 
 // We use this to control font-smoothing
@@ -229,7 +230,7 @@ $include-html-global-classes: $include-html-classes;
 // $h1-font-reduction: rem-calc(10);
 // $h2-font-reduction: rem-calc(10);
 // $h3-font-reduction: rem-calc(5);
-// $h4-font-reduction: rem-calc(5);
+ //$h4-font-reduction: rem-calc(8);
 // $h5-font-reduction: 0;
 // $h6-font-reduction: 0;
 
@@ -457,13 +458,13 @@ $include-html-global-classes: $include-html-classes;
 // $button-font-align: center;
 
 // We use these to control various hover effects.
-// $button-function-factor: -20%;
+$button-function-factor: 20%;
 
 // We use these to control button border styles.
 // $button-border-width: 0;
 // $button-border-style: solid;
-// $button-bg-color: $primary-color;
-// $button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor);
+ $button-bg-color: $randy-newman;
+ $button-bg-hover: scale-color($cold-grape, $lightness: $button-function-factor);
 // $button-border-color: $button-bg-hover;
 // $secondary-button-bg-hover: scale-color($secondary-color, $lightness: $button-function-factor);
 // $secondary-button-border-color: $secondary-button-bg-hover;
