@@ -130,6 +130,7 @@ section {
 	text-align: center;
 	display: block;
 	background-color: white;
+  overflow-x: scroll;
 
   ::-moz-selection { /* Code for Firefox */
     color: $randy-newman;

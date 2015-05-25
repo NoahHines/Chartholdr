@@ -1,0 +1,4 @@
+# Remove www from any URLs that have them:
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.
+RewriteRule ^(.*)$ http://chartholdr.io/$1 [R=301,L]
