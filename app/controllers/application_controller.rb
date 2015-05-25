@@ -6,30 +6,13 @@ class ApplicationController < ActionController::Base
 	def set_constants
 	 	@max_width = 5000 #default constraint is 5000x5000 image
 		@max_height = 5000
-	end
 
-	def get_binding # this is only a helper method to access the objects binding method
-	    binding
-	  end
-
-	def hello
-		render text: "Welcome to Chartholdr. Here's an example url: http://localhost:3000/bar/800/700"
-	end
-
-	# Home page
-	def home
-
-	end
-
-	def pie
-		
-		#TODO move this logic to generator class
-		#TODO add support for SVGs
+		@layout_type = "pie" #default chart is pie
 
 		# If height is not specified, assume square
 		@width = params[:width]
-		if !defined?(@height)
-			@height = params[:width]
+		if !(5 < params[:height].to_i && params[:height].to_i <= 5000)
+			@height = @width
 		else
 			@height = params[:height]
 		end
@@ -42,31 +25,60 @@ class ApplicationController < ActionController::Base
 		if (@width.to_i > @max_width || @height.to_i > @max_height)
 			return
 		end
-
-		html = File.open("#{Rails.root}"+"/app/views/layouts/pie_layout.html.erb").read
-	    template = ERB.new(html)
-		template = template.result(get_binding).html_safe
-
-		# @tempFile is the generated HTML file that calls Pizza.init()
-		@templateFile = Tempfile.new(['templatefile', '.html'], "#{Rails.root}/tmp")
-		@templateFile.write(template)
-		File.chmod(444, @templateFile.path)
-		@templateFile.rewind
-
-		# data object is used to pass in parameters into the js file
-		data = {"width" => @width, "height" => @height, "template" => @templateFile.path}.to_json
-		dataFile = Tempfile.new(['data', '.txt'], "#{Rails.root}/tmp")
-		dataFile.write(data)
-		File.chmod(444, dataFile.path)
-		dataFile.rewind
-
-		Phantomjs.run("#{Rails.root}"+"/phantom/render.js", dataFile.path)
-
-		# Send file inline
-		send_data(File.open("#{Rails.root}"+"/render.png").read, :type => "image/png", :disposition => 'inline')
-
-		
 	end
+
+	def get_binding # helper method to access the objects binding method
+	    binding
+	  end
+
+	# Home page
+	def home
+
+	end
+
+	def bar
+		@layout_type = "bar"
+		render_it
+	end
+
+	def line
+		@layout_type = "line"
+		render_it
+	end
+
+	def pie
+		@layout_type = "pie"
+		render_it
+	end
+
+	private
+		def render_it
+			#TODO move this logic to generator class
+			#TODO add support for SVGs
+
+			html = File.open("#{Rails.root}"+"/app/views/layouts/"+@layout_type.to_s+"_layout.html.erb").read
+		    template = ERB.new(html)
+			template = template.result(get_binding).html_safe
+
+			# @tempFile is the generated HTML file that calls Pizza.init()
+			@templateFile = Tempfile.new(['templatefile', '.html'], "#{Rails.root}/tmp")
+			@templateFile.write(template)
+			File.chmod(444, @templateFile.path)
+			@templateFile.rewind
+
+			# data object is used to pass in parameters into the js file
+			data = {"width" => @width, "height" => @height, "template" => @templateFile.path}.to_json
+			dataFile = Tempfile.new(['data', '.txt'], "#{Rails.root}/tmp")
+			dataFile.write(data)
+			File.chmod(444, dataFile.path)
+			dataFile.rewind
+
+			Phantomjs.run("#{Rails.root}"+"/phantom/render.js", dataFile.path)
+
+			# Send file inline
+			send_data(File.open("#{Rails.root}"+"/render.png").read, :type => "image/png", :disposition => 'inline')
+
+		end
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

@@ -1,0 +1,42 @@
+<html>
+<head>
+	<link href="<%= Rails.root %>/public/stylesheets/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+	<style>
+		body {
+			margin: 0;
+			background-color: white;
+		}
+		svg {
+		  width: <%= @width %>px;
+		}
+		#line {
+			height: <%= @height %>px;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<div id="line" style="height: <%= @height %>px;"></div>
+
+	<ul data-line-id="line" style="display: none;">
+        <li data-y="0" data-x="0">Water Buffalo</li>
+        <li data-y="10" data-x="10">Bison</li>
+        <li data-y="20" data-x="20">Bison</li>
+        <li data-y="30" data-x="30">Bison</li>
+        <li data-y="35" data-x="40">Bison</li>
+        <li data-y="50" data-x="200">Bison</li>
+      </ul>
+
+	<script src="<%= Rails.root %>/public/javascripts/jquery.min.js"></script>
+	<script src="<%= Rails.root %>/public/javascripts/snap.svg-min.js"></script>
+	<script src="<%= Rails.root %>/public/javascripts/pizza.min.js"></script>
+
+	<script>
+	Pizza.init();
+	</script>
+</body>
+
+</html>
+

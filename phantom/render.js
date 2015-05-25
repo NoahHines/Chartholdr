@@ -7,8 +7,6 @@ var opened = fs.open(path, "r");
 var data = fs.read(path);
 var jsonData = JSON.parse(data);
 
-fs.write("var.txt", jsonData["template"], 'w');
-
 var page = require('webpage').create();
 page.viewportSize = { width: jsonData["width"], height: jsonData["height"] };
 page.open(jsonData["template"], function start(status) {
