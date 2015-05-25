@@ -186,6 +186,13 @@ section {
   h2, h3, h4 {
     font-weight: 300;
   }
+  .links {
+    font-size: 1em;
+  }
+  // Icons fall off on super small mobile. So shrink them.
+  .footer-icon {
+    font-size: 1.5em;
+  }
 
 
   } /* max-width 640px, mobile-only styles, use when QAing mobile issues */

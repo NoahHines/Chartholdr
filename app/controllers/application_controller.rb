@@ -64,17 +64,22 @@ class ApplicationController < ActionController::Base
 			File.chmod(444, @templateFile.path)
 			@templateFile.rewind
 
+
+			# Create temp image to send
+			@tempImageFile = Tempfile.new(['image', '.png'], "#{Rails.root}/tmp")
+
 			# data object is used to pass in parameters into the js file
-			data = {"width" => @width, "height" => @height, "template" => @templateFile.path}.to_json
+			data = {"width" => @width, "height" => @height, "template" => @templateFile.path, "image" => @tempImageFile.path}.to_json
 			dataFile = Tempfile.new(['data', '.txt'], "#{Rails.root}/tmp")
 			dataFile.write(data)
 			File.chmod(444, dataFile.path)
 			dataFile.rewind
 
+
 			Phantomjs.run("#{Rails.root}"+"/phantom/render.js", dataFile.path)
 
 			# Send file inline
-			send_data(File.open("#{Rails.root}"+"/render.png").read, :type => "image/png", :disposition => 'inline')
+			send_data(File.open(@tempImageFile.path).read, :type => "image/png", :disposition => 'inline')
 
 		end
 
