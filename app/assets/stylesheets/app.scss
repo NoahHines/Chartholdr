@@ -2,8 +2,6 @@
 	Custom CSS for Chartholdr
 */
 
-
-
 /* MIXINS*/
 
 @mixin linear-gradient($direction, $color-stops...) {
@@ -68,7 +66,7 @@ a {
   color: $dolphin-fart;
 }
 a:hover {
-  color: $bubble-blue;
+  color: $submarine;
 }
 
 h1 {
@@ -144,6 +142,34 @@ section {
   }
 }
 
+.footer-icon {
+  color: $bubble-blue;
+  font-size: 2em;
+  padding-top: 0.5em;
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+  /* font-size: 120%; */
+  -webkit-font-smoothing: antialiased;
+}
+.footer-icon:hover {
+  color: $submarine;
+}
+.super-align {
+  vertical-align: super;
+}
+
 // Small screens
 @media only screen { } /* Define mobile styles */
 
@@ -154,9 +180,12 @@ section {
   header .row .title {
     padding-top: 1em;
   }
-section {
-  padding: 2em 0 1em 0;
-}
+  section {
+    padding: 2em 0 1em 0;
+  }
+  h2, h3, h4 {
+    font-weight: 300;
+  }
 
 
   } /* max-width 640px, mobile-only styles, use when QAing mobile issues */

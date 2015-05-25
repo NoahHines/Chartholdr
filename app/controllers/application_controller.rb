@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
 	 	@max_width = 5000 #default constraint is 5000x5000 image
 		@max_height = 5000
 
-		@layout_type = "pie" #default chart is pie
-
 		# If height is not specified, assume square
 		@width = params[:width]
 		if !(5 < params[:height].to_i && params[:height].to_i <= 5000)
@@ -38,25 +36,25 @@ class ApplicationController < ActionController::Base
 
 	def bar
 		@layout_type = "bar"
-		render_it
+		render_it(@layout_type)
 	end
 
 	def line
 		@layout_type = "line"
-		render_it
+		render_it(@layout_type)
 	end
 
 	def pie
 		@layout_type = "pie"
-		render_it
+		render_it(@layout_type)
 	end
 
 	private
-		def render_it
+		def render_it(layout = "pie") #default chart is pi
 			#TODO move this logic to generator class
 			#TODO add support for SVGs
 
-			html = File.open("#{Rails.root}"+"/app/views/layouts/"+@layout_type.to_s+"_layout.html.erb").read
+			html = File.open("#{Rails.root}"+"/app/views/layouts/"+layout.to_s+"_layout.html.erb").read
 		    template = ERB.new(html)
 			template = template.result(get_binding).html_safe
 
