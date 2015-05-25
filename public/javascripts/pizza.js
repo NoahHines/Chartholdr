@@ -11,8 +11,9 @@ var Pizza = {
     show_grid: true,
     bar_spacer: 100,
     bar_intervals: 6,
-    animation_type: 'elastic' // options: backin, backout, bounce, easein, 
+    animation_type: 'elastic', // options: backin, backout, bounce, easein, 
                               //          easeinout, easeout, linear
+    stroke_width: 1 
   },
 
   NS : 'http://www.w3.org/2000/svg',
@@ -143,9 +144,11 @@ var Pizza = {
 
         if (!/text/.test(text.node.nodeName)) return;
 
-        text.animate({
-          opacity: 0
-        }, settings.animation_speed);
+        if (!settings.show_text) {
+          text.animate({
+            opacity: 0
+          }, settings.animation_speed);
+        }
       });
 
   },
@@ -529,7 +532,7 @@ $.extend(Pizza, {
     }
     var v = this.points_to_path(points);
 
-    this.set_attr(polyline, {d:v, fill: 'none', stroke: '#1976d2', 'stroke-width': 8});
+    this.set_attr(polyline, {d:v, fill: 'none', stroke: settings.strokeColor, 'stroke-width': settings.strokeWidth});
 
     if (existing_group.length < 1) {
       line_g.appendChild(polyline);
