@@ -27,7 +27,9 @@ class ApplicationController < ActionController::Base
 			if (@width.to_i > @max_width || @height.to_i > @max_height)
 				return
 			end
-		else @height = @width
+		else
+			@height = @width
+			@color =""
 		end
 
 		# adjusted width and heights -8 and -18 due to default css margins
@@ -105,7 +107,7 @@ class ApplicationController < ActionController::Base
 		def render_it(layout = "pie") #default chart is pi
 			#TODO move this logic to generator class
 			#TODO add support for SVGs
-			
+
 			html = File.open("#{Rails.root}"+"/app/views/layouts/"+layout.to_s+"_layout.html.erb").read
 		    template = ERB.new(html)
 			template = template.result(get_binding).html_safe
