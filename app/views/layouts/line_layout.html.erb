@@ -15,8 +15,9 @@
 	</style>
 </head>
 <body>
+	<!-- Default color... Bubble blue! -->
 	<% if @color==="" %>
-		<% @color = "#000000" %>
+		<% @color = "#1976d2" %>
 	<% end %>
 	<div id="line" style="height: <%= @height %>px;"></div>
 	<ul data-line-id="line" style="display: none;"  data-options='{"strokeWidth": 8, "strokeColor": "<%= @color %>"}'>
