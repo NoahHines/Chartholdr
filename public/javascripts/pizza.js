@@ -13,7 +13,8 @@ var Pizza = {
     bar_intervals: 6,
     animation_type: 'elastic', // options: backin, backout, bounce, easein, 
                               //          easeinout, easeout, linear
-    stroke_width: 1 
+    stroke_width: 1,
+    stroke_color: '#000000'
   },
 
   NS : 'http://www.w3.org/2000/svg',

@@ -15,6 +15,9 @@
 	</style>
 </head>
 <body>
+	<% if @color==="" %>
+		<% @color = "#000000" %>
+	<% end %>
 	<div id="line" style="height: <%= @height %>px;"></div>
 	<ul data-line-id="line" style="display: none;"  data-options='{"strokeWidth": 8, "strokeColor": "<%= @color %>"}'>
         <li data-y="0" data-x="0">Water Buffalo</li>

@@ -1,28 +1,28 @@
 <html>
 <head>
 	<link href="<%= Rails.root %>/public/stylesheets/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
-	<% if !(@color==="")  %>
-		<style>
+	<style>
 			body {
 				background-color: #f4f4f4;
 			}
 			#bar {
 				height: <%= @height %>px;
 			}
-			[data-pie-id] > *:nth-child(6n+1), [data-bar-id] > *:nth-child(6n+1), [data-line-id] > *:nth-child(6n+1) {
-			color: <%= lighten_color(@color, 0.025) %>; }
-			[data-pie-id] > *:nth-child(6n+2), [data-bar-id] > *:nth-child(6n+2), [data-line-id] > *:nth-child(6n+2) {
-			color: <%= lighten_color(@color, 0.1) %>; }
-			[data-pie-id] > *:nth-child(6n+3), [data-bar-id] > *:nth-child(6n+3), [data-line-id] > *:nth-child(6n+3) {
-			color: <%= lighten_color(@color, 0.05) %>; }
-			[data-pie-id] > *:nth-child(6n+4), [data-bar-id] > *:nth-child(6n+4), [data-line-id] > *:nth-child(6n+4) {
-			color: <%= darken_color(@color, 0.925) %>; }
-			[data-pie-id] > *:nth-child(6n+5), [data-bar-id] > *:nth-child(6n+5), [data-line-id] > *:nth-child(6n+5) {
-			color: <%= darken_color(@color, 0.95) %>; }
-			[data-pie-id] > *:nth-child(6n+6), [data-bar-id] > *:nth-child(6n+6), [data-line-id] > *:nth-child(6n+6) {
-			color: <%= darken_color(@color, 0.975) %>; }
-		</style>
-	<% end %>
+		<% if !(@color==="")  %>
+				[data-pie-id] > *:nth-child(6n+1), [data-bar-id] > *:nth-child(6n+1), [data-line-id] > *:nth-child(6n+1) {
+				color: <%= lighten_color(@color, 0.025) %>; }
+				[data-pie-id] > *:nth-child(6n+2), [data-bar-id] > *:nth-child(6n+2), [data-line-id] > *:nth-child(6n+2) {
+				color: <%= lighten_color(@color, 0.1) %>; }
+				[data-pie-id] > *:nth-child(6n+3), [data-bar-id] > *:nth-child(6n+3), [data-line-id] > *:nth-child(6n+3) {
+				color: <%= lighten_color(@color, 0.05) %>; }
+				[data-pie-id] > *:nth-child(6n+4), [data-bar-id] > *:nth-child(6n+4), [data-line-id] > *:nth-child(6n+4) {
+				color: <%= darken_color(@color, 0.925) %>; }
+				[data-pie-id] > *:nth-child(6n+5), [data-bar-id] > *:nth-child(6n+5), [data-line-id] > *:nth-child(6n+5) {
+				color: <%= darken_color(@color, 0.95) %>; }
+				[data-pie-id] > *:nth-child(6n+6), [data-bar-id] > *:nth-child(6n+6), [data-line-id] > *:nth-child(6n+6) {
+				color: <%= darken_color(@color, 0.975) %>; }
+		<% end %>
+	</style>
 </head>
 <body>
 	<div id="bar" style="height: <%= @height %>px;"></div>
