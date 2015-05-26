@@ -123,22 +123,27 @@ section {
 }
 
 .links {
-  color: $cold-grape;
-	border: 2px solid $submarine;
-	padding: 0.5em;
-	text-align: center;
-	display: block;
-	background-color: white;
-  overflow-x: scroll;
+  color: $cold-grape !important;
+  border: 2px solid $submarine !important;
+  padding: 0.5em !important;
+  text-align: center !important;
+  display: block !important;
+  background-color: white !important;
+  overflow-x: scroll !important;
+  width: 100% !important;
+  height: 2.5em !important;
+  font-size: 1em !important;
+}
 
+span {
   ::-moz-selection { /* Code for Firefox */
-    color: $randy-newman;
-    background: $submarine;
+    color: $randy-newman !important;
+    background: $submarine !important;
   }
 
   ::selection {
-      color: $randy-newman; 
-      background: $submarine;
+    color: $randy-newman !important; 
+    background: $submarine !important;
   }
 }
 
