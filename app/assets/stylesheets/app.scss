@@ -118,6 +118,30 @@ section {
   padding: 6em 0 4em 0;
 }
 
+#marketing {
+  #jellys1 {
+    position: absolute;
+    right: 5px;
+  }
+  #jellys2 {
+    position: absolute;
+    left: 5px;
+  }
+}
+
+#anglerfish {
+    position: absolute;
+    right: 20px;
+    opacity: 0.7;
+  }
+
+#submarine {
+    position: absolute;
+    left: 0;
+    width: 400px;
+    opacity: 0.7;
+  }
+
 .deepwater {
   @include linear-gradient($captains-chair, $cold-grape);
 }
@@ -215,6 +239,9 @@ span {
   // Icons fall off on super small mobile. So shrink them.
   .footer-icon {
     font-size: 1.5em;
+  }
+  .sea-character {
+    display: none;
   }
 
 
