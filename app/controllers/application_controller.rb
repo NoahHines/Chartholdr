@@ -43,19 +43,27 @@ class ApplicationController < ActionController::Base
 		#
 		# example: params[:color] = c=ffffff
 		if params[:color] != nil
-			if (params[:color].length == 5 || params[:color].length == 7 || params[:color].length == 8)
+			if (params[:color].length == 5 || params[:color].length == 8)
 				@color = params[:color][2,params[:color].length-1]
 			else
 				@color = ""
 			end
 		else
 			if params[:height] != nil
-				if (params[:height].length == 5 || params[:height].length == 7 || params[:height].length == 8)
+				if (params[:height].length == 5 || params[:height].length == 8)
 					@color = params[:height][2,params[:height].length-1]
 				else
 					@color =""
 				end
 			end
+		end
+		# Convert color to proper length 6
+		if @color.length === 3
+			@color = (@color.to_s + @color.to_s)
+			@color_new = @color[0] + @color[0]
+			@color_new += @color[1] + @color[1]
+			@color_new += @color[2] + @color[2]
+			@color = @color_new
 		end
 	end
 
