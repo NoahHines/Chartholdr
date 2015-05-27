@@ -173,7 +173,8 @@ class ApplicationController < ActionController::Base
 			Phantomjs.run("#{Rails.root}/phantom/render.js", dataFile.path)
 
 			# if in prod, save image to public folder
-			if Rails.env.production?
+			if Rails.env.production? # to test caching on localhost,
+									 # add "!" before Rails.env
 
 				FileUtils.mkdir_p @final_path unless File.exists?(@final_path)
 				# if no color specified...
