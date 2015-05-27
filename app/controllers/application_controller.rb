@@ -67,18 +67,6 @@ class ApplicationController < ActionController::Base
 			@color = @color_new
 		end
 
-		# if in prod, check if image already exists.
-		if Rails.env.production?
-			@color_string = ""
-			if !@color === ""
-				@color_string = @color + "/"
-			end
-			@final_path = "#{Rails.root}" + "/public/" + @width.to_s + '/' + @height.to_s + '/' + @color_string.to_s
-			if File.exist?(@final_path + "chart.png")
-				send_data(File.open(@final_path + "chart.png").read, :type => "image/png", :disposition => 'inline')
-			end
-		end
-
 	end
 
 	def get_binding # helper method to access the objects binding method
@@ -141,6 +129,26 @@ class ApplicationController < ActionController::Base
 			#TODO move this logic to generator class
 			#TODO add support for SVGs
 
+			# if in prod, check if image already exists.
+			if Rails.env.production?
+				@color_string = ""
+				if @color != ""
+					@color_string = @color + "/"
+				end
+				@final_path = "#{Rails.root}" + "/public/" + @layout_type + '/' + @width.to_s + '/' + @height.to_s + '/'
+
+				if (File.exist?(@final_path + "chart.png") && @color === "")
+					send_data(File.open(@final_path + "chart.png").read, :type => "image/png", :disposition => 'inline')
+					return
+				else
+					FileUtils.mkdir_p (@final_path + @color_string) unless File.exists?(@final_path + @color_string)
+					if (File.exist?(@final_path + @color_string + "chart.png")  && @color != "")
+						send_data(File.open(@final_path + @color_string.to_s + "chart.png").read, :type => "image/png", :disposition => 'inline')
+						return
+					end
+				end
+			end
+
 			html = File.open("#{Rails.root}/app/views/layouts/"+layout.to_s+"_layout.html.erb").read
 		    template = ERB.new(html)
 			template = template.result(get_binding).html_safe
@@ -166,14 +174,23 @@ class ApplicationController < ActionController::Base
 
 			# if in prod, save image to public folder
 			if Rails.env.production?
+
 				FileUtils.mkdir_p @final_path unless File.exists?(@final_path)
-				File.rename(@tempImageFile.path, @final_path + "chart.png")
-				send_data(File.open(@final_path + "chart.png").read, :type => "image/png", :disposition => 'inline')
+				# if no color specified...
+				if @color===""
+					File.rename(@tempImageFile.path, @final_path + "chart.png")
+					send_data(File.open(@final_path + "chart.png").read, :type => "image/png", :disposition => 'inline')
+				# otherwise, place color image in new subfolder
+				else
+					FileUtils.mkdir_p (@final_path + @color_string) unless File.exists?(@final_path + @color_string)
+					File.rename(@tempImageFile.path, @final_path + @color_string + "chart.png")
+					send_data(File.open(@final_path + @color_string + "chart.png").read, :type => "image/png", :disposition => 'inline')
+				end
+
 			else
 				# Send file inline
 				send_data(File.open(@tempImageFile.path).read, :type => "image/png", :disposition => 'inline')
 			end
-
 		end
 
   # Prevent CSRF attacks by raising an exception.
