@@ -1,20 +1,21 @@
 require 'phantomjs'
-#require 'carrierwave/orm/activerecord'
+
+require 'fileutils'
 
 class ApplicationController < ActionController::Base
-
-	# chart uploader using carrierwave
-	  #mount_uploader :chart, ChartUploader
 
 	# set constants
 	before_filter :set_constants
 	def set_constants
+
 	 	@max_width = 5000 #default constraint is 5000x5000 image
 		@max_height = 5000
 
+		# final image path
+		@final_path = ""
+
 		# Dimension Handling
 		# ---------------
-
 		# If height is not specified, assume square
 		@width = params[:width]
 		if params[:height] != nil
@@ -53,7 +54,7 @@ class ApplicationController < ActionController::Base
 				if (params[:height].length == 5 || params[:height].length == 8)
 					@color = params[:height][2,params[:height].length-1]
 				else
-					@color =""
+					@color = ""
 				end
 			end
 		end
@@ -65,6 +66,19 @@ class ApplicationController < ActionController::Base
 			@color_new += @color[2] + @color[2]
 			@color = @color_new
 		end
+
+		# if in prod, check if image already exists.
+		if Rails.env.production?
+			@color_string = ""
+			if !@color === ""
+				@color_string = @color + "/"
+			end
+			@final_path = "#{Rails.root}" + "/public/" + @width.to_s + '/' + @height.to_s + '/' + @color_string.to_s
+			if File.exist?(@final_path + "chart.png")
+				send_data(File.open(@final_path + "chart.png").read, :type => "image/png", :disposition => 'inline')
+			end
+		end
+
 	end
 
 	def get_binding # helper method to access the objects binding method
@@ -89,6 +103,17 @@ class ApplicationController < ActionController::Base
 	def pie
 		@layout_type = "pie"
 		render_it(@layout_type)
+	end
+
+	def create_file(path, extension)
+	  dir = File.dirname(path)
+
+	  unless File.directory?(dir)
+	    FileUtils.mkdir_p(dir)
+	  end
+
+	  path << ".#{extension}"
+	  File.new(path, 'w')
 	end
 
 	# Amount should be a decimal between 0 and 1. Lower means darker
@@ -116,7 +141,7 @@ class ApplicationController < ActionController::Base
 			#TODO move this logic to generator class
 			#TODO add support for SVGs
 
-			html = File.open("#{Rails.root}"+"/app/views/layouts/"+layout.to_s+"_layout.html.erb").read
+			html = File.open("#{Rails.root}/app/views/layouts/"+layout.to_s+"_layout.html.erb").read
 		    template = ERB.new(html)
 			template = template.result(get_binding).html_safe
 
@@ -137,10 +162,17 @@ class ApplicationController < ActionController::Base
 			File.chmod(444, dataFile.path)
 			dataFile.rewind
 
-			Phantomjs.run("#{Rails.root}"+"/phantom/render.js", dataFile.path)
+			Phantomjs.run("#{Rails.root}/phantom/render.js", dataFile.path)
 
-			# Send file inline
-			send_data(File.open(@tempImageFile.path).read, :type => "image/png", :disposition => 'inline')
+			# if in prod, save image to public folder
+			if Rails.env.production?
+				FileUtils.mkdir_p @final_path unless File.exists?(@final_path)
+				File.rename(@tempImageFile.path, @final_path + "chart.png")
+				send_data(File.open(@final_path + "chart.png").read, :type => "image/png", :disposition => 'inline')
+			else
+				# Send file inline
+				send_data(File.open(@tempImageFile.path).read, :type => "image/png", :disposition => 'inline')
+			end
 
 		end
 
