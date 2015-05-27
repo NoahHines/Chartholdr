@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  root 'application#index'
+  # WIP 404 page =)
+  # if Rails.env.production?
+  #    get '404', :to => 'application#page_not_found'
+  # end
+
+  root 'application#home'
 
   get '/home', to: 'application#home'
 
