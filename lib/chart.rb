@@ -41,4 +41,14 @@ class Chart
 		generator = Generator.new(self)
 		return generator.render
 	end
+
+	def final_path
+		return @final_path
+	end
+	def color_string
+		return @color_string
+	end
+	def color
+		return @color
+	end
 end

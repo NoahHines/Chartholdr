@@ -17,7 +17,7 @@
 			[data-pie-id] > *:nth-child(6n+2), [data-bar-id] > *:nth-child(6n+2), [data-line-id] > *:nth-child(6n+2) {
 			color: <%= lighten_color(@chart.color, 0.0) %>; }
 			[data-pie-id] > *:nth-child(6n+3), [data-bar-id] > *:nth-child(6n+5), [data-line-id] > *:nth-child(6n+5) {
-			color: <%= darken_color(color, 0.9) %>; }
+			color: <%= darken_color(@chart.color, 0.9) %>; }
 		</style>
 	<% end %>
 </head>

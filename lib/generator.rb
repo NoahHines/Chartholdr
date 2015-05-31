@@ -70,16 +70,16 @@ class Generator
 
 		# if in prod, save image to public folder
 		if Rails.env.production?
-			FileUtils.mkdir_p @chart.final_path unless File.exists?(@final_path)
+			FileUtils.mkdir_p @chart.final_path unless File.exists?(@chart.final_path)
 			# if no color specified...
 			if @color===""
 				File.rename(@tempImageFile.path, @chart.final_path + "chart.png")
 				return @chart.final_path + "chart.png"
 			# otherwise, place color image in new subfolder
 			else
-				FileUtils.mkdir_p (@final_path + @color_string) unless File.exists?(@final_path + @color_string)
-				File.rename(@tempImageFile.path, @final_path + @color_string + "chart.png")
-				return @final_path + @color_string + "chart.png"
+				FileUtils.mkdir_p (@chart.final_path + @chart.color_string) unless File.exists?(@chart.final_path + @chart.color_string)
+				File.rename(@tempImageFile.path, @chart.final_path + @chart.color_string + "chart.png")
+				return @chart.final_path + @chart.color_string + "chart.png"
 			end
 
 		else
