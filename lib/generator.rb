@@ -46,7 +46,6 @@ class Generator
     def render
 		html = File.open("#{Rails.root}/app/views/layouts/"+@chart.type.to_s+"_layout.html.erb").read
 		template = ERB.new(html)
-
 		template = template.result(get_binding).html_safe
 
 		# @templateFile is the generated HTML file that calls Pizza.init()
@@ -81,7 +80,6 @@ class Generator
 				File.rename(@tempImageFile.path, @chart.final_path + @chart.color_string + "chart.png")
 				return @chart.final_path + @chart.color_string + "chart.png"
 			end
-
 		else
 			# if not in prod, return file inline without caching
 			return @tempImageFile.path

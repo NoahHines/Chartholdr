@@ -2,6 +2,8 @@
 # Author: Noah Hines
 # File: chart.rb
 
+require "generator"
+
 class Chart
 	attr_accessor :type,:width,:height,:color
 
@@ -40,6 +42,10 @@ class Chart
 		# and render a new image
 		generator = Generator.new(self)
 		return generator.render
+	end
+
+	def get_image
+		return File.open(get)
 	end
 
 	def final_path
