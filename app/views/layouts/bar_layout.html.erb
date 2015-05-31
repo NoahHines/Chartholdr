@@ -6,21 +6,21 @@
 				background-color: #f4f4f4;
 			}
 			#bar {
-				height: <%= @height %>px;
+				height: <%= @chart.height %>px;
 			}
-		<% if !(@color==="")  %>
+		<% if !(@chart.color==="")  %>
 				[data-pie-id] > *:nth-child(6n+1), [data-bar-id] > *:nth-child(6n+1), [data-line-id] > *:nth-child(6n+1) {
-				color: <%= lighten_color(@color, 0.025) %>; }
+				color: <%= lighten_color(@chart.color, 0.025) %>; }
 				[data-pie-id] > *:nth-child(6n+2), [data-bar-id] > *:nth-child(6n+2), [data-line-id] > *:nth-child(6n+2) {
-				color: <%= lighten_color(@color, 0.1) %>; }
+				color: <%= lighten_color(@chart.color, 0.1) %>; }
 				[data-pie-id] > *:nth-child(6n+3), [data-bar-id] > *:nth-child(6n+3), [data-line-id] > *:nth-child(6n+3) {
-				color: <%= lighten_color(@color, 0.05) %>; }
+				color: <%= lighten_color(@chart.color, 0.05) %>; }
 				[data-pie-id] > *:nth-child(6n+4), [data-bar-id] > *:nth-child(6n+4), [data-line-id] > *:nth-child(6n+4) {
-				color: <%= darken_color(@color, 0.925) %>; }
+				color: <%= darken_color(@chart.color, 0.925) %>; }
 				[data-pie-id] > *:nth-child(6n+5), [data-bar-id] > *:nth-child(6n+5), [data-line-id] > *:nth-child(6n+5) {
-				color: <%= darken_color(@color, 0.95) %>; }
+				color: <%= darken_color(@chart.color, 0.95) %>; }
 				[data-pie-id] > *:nth-child(6n+6), [data-bar-id] > *:nth-child(6n+6), [data-line-id] > *:nth-child(6n+6) {
-				color: <%= darken_color(@color, 0.975) %>; }
+				color: <%= darken_color(@chart.color, 0.975) %>; }
 		<% end %>
 	</style>
 </head>
@@ -34,14 +34,14 @@
 		<li data-value="250"></li>
 		<li data-value="159"></li>
 		<li data-value="78"></li>
-		<% if (@width.to_f / @height.to_f) >= 1.5  %>
+		<% if (@chart.width.to_f / @chart.height.to_f) >= 1.5  %>
 			<li data-value="125"></li>
 			<li data-value="138"></li>
 			<li data-value="190"></li>
 			<li data-value="122"></li>
 			<li data-value="200"></li>
 		<% end %>
-		<% if (@width.to_f / @height.to_f) >= 3  %>
+		<% if (@chart.width.to_f / @chart.height.to_f) >= 3  %>
 			<li data-value="125"></li>
 			<li data-value="138"></li>
 			<li data-value="190"></li>
