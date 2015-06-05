@@ -6,7 +6,7 @@
 				background-color: #f4f4f4;
 			}
 			#bar {
-				height: <%= @chart.height - 16 %>px;
+				height: <%= @chart.height.to_f - 16 %>px;
 			}
 		<% if !(@chart.color==="")  %>
 				[data-pie-id] > *:nth-child(6n+1), [data-bar-id] > *:nth-child(6n+1), [data-line-id] > *:nth-child(6n+1) {
