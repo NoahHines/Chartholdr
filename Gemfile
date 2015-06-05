@@ -4,11 +4,11 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 
+gem 'rspec-rails',      ">= 2.0.0.beta"
+
 gem 'phantomjs'
 
-# IMGKit
-gem 'imgkit'
-gem 'wkhtmltoimage-binary'
+gem 'fastimage'
 
 # Foundation
 gem 'foundation-rails'
@@ -53,10 +53,12 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
 
-  
 end
 
 group :production do
+  gem 'carrierwave'
+  gem 'fog'
+  gem "mini_magick"
   gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
   gem 'sqlite3'

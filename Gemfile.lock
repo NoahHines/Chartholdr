@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.1)
     actionmailer (4.2.1)
       actionpack (= 4.2.1)
       actionview (= 4.2.1)
@@ -36,12 +37,18 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.3.8)
     arel (6.0.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (4.0.5)
       columnize (= 0.9.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -51,15 +58,117 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     debug_inspector (0.0.2)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
+    excon (0.45.3)
     execjs (2.5.2)
+    fastimage (1.7.0)
+      addressable (~> 2.3, >= 2.3.5)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
+    fog (1.30.0)
+      fog-atmos
+      fog-aws (~> 0.0)
+      fog-brightbox (~> 0.4)
+      fog-core (~> 1.27, >= 1.27.4)
+      fog-ecloud
+      fog-google (>= 0.0.2)
+      fog-json
+      fog-local
+      fog-powerdns (>= 0.1.1)
+      fog-profitbricks
+      fog-radosgw (>= 0.0.2)
+      fog-riakcs
+      fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
+      fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-xml (~> 0.1.1)
+      ipaddress (~> 0.5)
+      nokogiri (~> 1.5, >= 1.5.11)
+    fog-atmos (0.1.0)
+      fog-core
+      fog-xml
+    fog-aws (0.3.0)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-brightbox (0.7.1)
+      fog-core (~> 1.22)
+      fog-json
+      inflecto (~> 0.0.2)
+    fog-core (1.30.0)
+      builder
+      excon (~> 0.45)
+      formatador (~> 0.2)
+      mime-types
+      net-scp (~> 1.1)
+      net-ssh (>= 2.1.3)
+    fog-ecloud (0.1.1)
+      fog-core
+      fog-xml
+    fog-google (0.0.5)
+      fog-core
+      fog-json
+      fog-xml
+    fog-json (1.0.1)
+      fog-core (~> 1.0)
+      multi_json (~> 1.0)
+    fog-local (0.2.1)
+      fog-core (~> 1.27)
+    fog-powerdns (0.1.1)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+    fog-profitbricks (0.0.2)
+      fog-core
+      fog-xml
+      nokogiri
+    fog-radosgw (0.0.4)
+      fog-core (>= 1.21.0)
+      fog-json
+      fog-xml (>= 0.0.1)
+    fog-riakcs (0.1.0)
+      fog-core
+      fog-json
+      fog-xml
+    fog-sakuracloud (1.0.1)
+      fog-core
+      fog-json
+    fog-serverlove (0.1.2)
+      fog-core
+      fog-json
+    fog-softlayer (0.4.6)
+      fog-core
+      fog-json
+    fog-storm_on_demand (0.1.1)
+      fog-core
+      fog-json
+    fog-terremark (0.1.0)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.1.0)
+      fission
+      fog-core
+    fog-voxel (0.1.0)
+      fog-core
+      fog-xml
+    fog-xml (0.1.2)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
+    formatador (0.2.5)
     foundation-rails (5.5.2.1)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
-    imgkit (1.6.0)
+    inflecto (0.0.2)
+    ipaddress (0.8.0)
     jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -73,9 +182,13 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.5)
+    mini_magick (4.2.4)
     mini_portile (0.6.2)
     minitest (5.6.1)
     multi_json (1.11.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.17.1)
@@ -114,6 +227,23 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    rspec-core (3.2.3)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-rails (3.2.1)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.2)
     sass (3.4.13)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -147,22 +277,25 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-    wkhtmltoimage-binary (0.12.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   byebug
+  carrierwave
   coffee-rails (~> 4.1.0)
+  fastimage
+  fog
   foundation-rails
-  imgkit
   jbuilder (~> 2.0)
   jquery-rails
+  mini_magick
   pg (= 0.17.1)
   phantomjs
   rails (= 4.2.1)
   rails_12factor (= 0.0.2)
+  rspec-rails (>= 2.0.0.beta)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
@@ -170,4 +303,3 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-  wkhtmltoimage-binary
