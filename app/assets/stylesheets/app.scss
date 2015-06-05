@@ -2,30 +2,25 @@
 	Custom CSS for Chartholdr
 */
 
-/* MIXINS*/
-
-@mixin linear-gradient($direction, $color-stops...) {
+  /* MIXINS*/
+  @mixin linear-gradient($direction, $color-stops...) {
   // Direction has been omitted and happens to be a color-stop
   @if is-direction($direction) == false {
     $color-stops: $direction, $color-stops;
     $direction: 180deg;
   }
- 
+
   background: nth(nth($color-stops, 1), 1);
   background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
   background: linear-gradient($direction, $color-stops);
 }
 
 /// Convert a direction to legacy syntax
-/// @param {Keyword | Angle} $value - Value to convert
-/// @require {function} is-direction
-/// @require {function} convert-angle
-/// @throw Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.;
 @function legacy-direction($value) {
   @if is-direction($value) == false {
     @error "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.";
   }
- 
+
   $conversion-map: (
     to top          : bottom,
     to top right    : bottom left,
@@ -39,12 +34,12 @@
     to left         : right,
     to left top     : right bottom,
     to top left     : bottom right
-  );
- 
+    );
+
   @if map-has-key($conversion-map, $value) {
     @return map-get($conversion-map, $value);
   }
- 
+
   @return 90deg - $value;
 }
 
@@ -56,8 +51,6 @@
   $is-angle: type-of($value) == 'number' and index('deg' 'grad' 'turn' 'rad', unit($value));
   @return $is-keyword or $is-angle;
 }
-
-/*    */
 
 @import 'palette';
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300);
@@ -102,7 +95,7 @@ small {
 
 h5 {
   font-weight: 300;
-	color: black !important;
+  color: black !important;
   a {
     color: $bubble-blue;
   }
@@ -134,17 +127,17 @@ section {
 }
 
 #anglerfish {
-    position: absolute;
-    right: 20px;
-    opacity: 0.7;
-  }
+  position: absolute;
+  right: 20px;
+  opacity: 0.7;
+}
 
 #submarine {
-    position: absolute;
-    left: 0;
-    width: 400px;
-    opacity: 0.7;
-  }
+  position: absolute;
+  left: 0;
+  width: 400px;
+  opacity: 0.7;
+}
 
 .deepwater {
   @include linear-gradient($captains-chair, $cold-grape);
@@ -247,8 +240,6 @@ span {
   .sea-character {
     display: none;
   }
-
-
   } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
 // Medium screens
@@ -268,9 +259,3 @@ span {
 
 // XXLarge screens
 @media only screen and (min-width: 120.063em) { } /* min-width 1921px, xxlarge screens */
-
-
-
-
-
-
