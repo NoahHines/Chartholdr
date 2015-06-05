@@ -65,18 +65,21 @@ class ApplicationController < ActionController::Base
 	end
 
 	def bar
-		bar = Chart.new("bar", @width, @height, @color).get
-		send_data(File.open(bar).read, :type => "image/png", :disposition => 'inline')
+		bar = Chart.new("bar", @width, @height, @color)
+		generator = Generator.new(bar, true)
+		send_data(File.open(generator.get).read, :type => "image/png", :disposition => 'inline')
 	end
 
 	def line
-		line = Chart.new("line", @width, @height, @color).get
-		send_data(File.open(line).read, :type => "image/png", :disposition => 'inline')
+		line = Chart.new("line", @width, @height, @color)
+		generator = Generator.new(line, true)
+		send_data(File.open(generator.get).read, :type => "image/png", :disposition => 'inline')
 	end
 
 	def pie
-		pie = Chart.new("pie", @width, @height, @color).get
-		send_data(File.open(pie).read, :type => "image/png", :disposition => 'inline')
+		pie = Chart.new("pie", @width, @height, @color)
+		generator = Generator.new(pie, true)
+		send_data(File.open(generator.get).read, :type => "image/png", :disposition => 'inline')
 	end
 
   # Prevent CSRF attacks by raising an exception.
