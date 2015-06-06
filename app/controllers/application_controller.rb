@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 	# set constants
 	before_filter :set_constants
 	def set_constants
-
+		@force_cache = false
 	 	@max_width = 5000 #default constraint is 5000x5000 image
 	 	@max_height = 5000
 
@@ -66,19 +66,19 @@ class ApplicationController < ActionController::Base
 
 	def bar
 		bar = Chart.new("bar", @width, @height, @color)
-		generator = Generator.new(bar, true)
+		generator = Generator.new(bar, @force_cache)
 		send_data(File.open(generator.get).read, :type => "image/png", :disposition => 'inline')
 	end
 
 	def line
 		line = Chart.new("line", @width, @height, @color)
-		generator = Generator.new(line, true)
+		generator = Generator.new(line, @force_cache)
 		send_data(File.open(generator.get).read, :type => "image/png", :disposition => 'inline')
 	end
 
 	def pie
 		pie = Chart.new("pie", @width, @height, @color)
-		generator = Generator.new(pie, true)
+		generator = Generator.new(pie, @force_cache)
 		send_data(File.open(generator.get).read, :type => "image/png", :disposition => 'inline')
 	end
 
