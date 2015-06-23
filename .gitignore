@@ -8,6 +8,9 @@
 /.bundle
 
 .DS_Store
+/public/pie
+/public/bar
+/public/line
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
