@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 	# set constants
 	before_filter :set_constants
 	def set_constants
+
 		@force_cache = false
 	 	@max_width = 5000 #default constraint is 5000x5000 image
 	 	@max_height = 5000
@@ -19,7 +20,7 @@ class ApplicationController < ActionController::Base
 		# If height is not specified, assume square
 		@width = params[:width]
 		if params[:height] != nil
-			if !(5 < params[:height].to_i && params[:height].to_i <= 5000)
+			if !(5 < params[:height].to_i && params[:height].to_i <= @max_width)
 				@height = @width
 			else
 				@height = params[:height]
@@ -30,7 +31,7 @@ class ApplicationController < ActionController::Base
 			end
 		else
 			@height = @width
-			@color =""
+			@color = ""
 		end
 
 		# Color Handling
@@ -80,6 +81,22 @@ class ApplicationController < ActionController::Base
 		pie = Chart.new("pie", @width, @height, @color)
 		generator = Generator.new(pie, @force_cache)
 		send_data(File.open(generator.get).read, :type => "image/png", :disposition => 'inline')
+	end
+
+	# gray renders
+	def bar_g
+		@color = "9E9E9E"
+		return bar
+	end
+
+	def line_g
+		@color = "9E9E9E"
+		return line
+	end
+
+	def pie_g
+		@color = "9E9E9E"
+		return pie
 	end
 
   # Prevent CSRF attacks by raising an exception.
